@@ -1,0 +1,21 @@
+{
+  "name": "finance-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server_local.js",
+  "scripts": {
+    "start": "node server_local.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "body-parser": "^1.20.3",
+    "chart.js": "^4.5.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "node-fetch": "^3.3.2",
+    "session-file-store": "^1.5.0",
+    "ws": "^8.13.0",
+    "web-push": "^3.6.6"
+  }
+}

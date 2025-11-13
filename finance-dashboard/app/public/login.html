@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#ffffff">
+  <title>Вход - Finance Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/512.png">
+  <link rel="shortcut icon" href="/192.png">
+  <style>
+    body { display:flex; min-height:100vh; align-items:center; justify-content:center; background: var(--bg); }
+    .login-card { width:min(380px, 100%); background: var(--card); border-radius: 16px; border:1px solid var(--border); padding: 24px; box-shadow:0 10px 25px rgba(15,23,42,0.12); }
+    .login-form { display:grid; gap:14px; }
+    .checkbox-row { display:flex; align-items:center; gap:8px; font-size:14px; }
+    .checkbox-row input { width:auto; height:auto; }
+    #msg { min-height: 24px; }
+  </style>
+  <script src="/login.js" defer></script>
+  <script>
+    (async () => {
+      try {
+        const r = await fetch('/me', { headers: { 'Accept': 'application/json' } });
+        if (r.ok) {
+          const m = await r.json();
+          if (m && m.username) location.href = '/';
+        }
+      } catch(e){}
+    })();
+  </script>
+</head>
+<body>
+  <div class="login-card">
+    <h2 style="margin:0 0 16px 0;">Вход</h2>
+    <div id="msg" class="muted"></div>
+    <form class="login-form" id="login-form">
+      <label>Имя пользователя
+        <input type="text" id="username" autocomplete="username" required />
+      </label>
+      <label>Пароль
+        <input type="password" id="password" autocomplete="current-password" required />
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="remember" checked />
+        <span>Запомнить меня</span>
+      </label>
+      <button type="submit" class="btn primary">Войти</button>
+    </form>
+  </div>
+</body>
+</html>
+

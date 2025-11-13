@@ -1,0 +1,66 @@
+name: Finance Dashboard
+slug: finance_dashboard
+description: Personal finance dashboard with AI voice input, Apple Pay automation, and multi-currency support
+version: "1.0.0"
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+webui: http://[HOST]:[PORT:3000]
+init: false
+ports:
+  3000/tcp: 3000
+options:
+  auth_users: ""
+  admin_user: ""
+  admin_pass: ""
+  session_secret: "change_this_secret"
+  session_store_path: "/data/sessions"
+  db_path: "/data/finance.db"
+  user_settings_path: "/data/user-settings.json"
+  desc_prop: "description"
+  cats_prop: "category"
+  amount_prop: "amount"
+  currency_prop: "currency"
+  date_prop: "date"
+  who_prop: "who"
+  usd_amount_prop: "usd_amount"
+  backup_script_url: ""
+  backup_config_path: "/data/backup-config.json"
+  backup_run_time: "03:00"
+  access_token: ""
+  vapid_public_key: ""
+  vapid_private_key: ""
+  ai_provider: "disabled"
+  gemini_api_key: ""
+  gemini_model: "gemini-2.0-flash"
+  openai_api_key: ""
+  openai_model: "gpt-4o-mini"
+schema:
+  auth_users: str?
+  admin_user: str?
+  admin_pass: str?
+  session_secret: str?
+  session_store_path: str?
+  db_path: str?
+  user_settings_path: str?
+  desc_prop: str?
+  cats_prop: str?
+  amount_prop: str?
+  currency_prop: str?
+  date_prop: str?
+  who_prop: str?
+  usd_amount_prop: str?
+  backup_script_url: str?
+  backup_config_path: str?
+  backup_run_time: str?
+  access_token: str?
+  vapid_public_key: str?
+  vapid_private_key: str?
+  ai_provider: list(disabled|gemini|openai)?
+  gemini_api_key: str?
+  gemini_model: list(gemini-2.0-flash-exp|gemini-2.0-flash|gemini-1.5-flash|gemini-1.5-flash-8b|gemini-1.5-pro)?
+  openai_api_key: str?
+  openai_model: list(gpt-4o|gpt-4o-mini|gpt-4-turbo|gpt-4|gpt-3.5-turbo)?

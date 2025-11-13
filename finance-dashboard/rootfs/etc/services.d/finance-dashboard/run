@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bashio
+
+set -euo pipefail
+
+# Supervisor's s6 service wrapper executes this script.
+exec /usr/local/bin/run.sh

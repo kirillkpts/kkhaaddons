@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Environment & runtime artifacts
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+
+# Build caches
+.ha-cache/
+dist/
+build/

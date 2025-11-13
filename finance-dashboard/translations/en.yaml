@@ -1,0 +1,80 @@
+name: Finance Dashboard
+description: Local-first personal finance dashboard with AI automations.
+configuration:
+  admin_user:
+    name: Admin username
+    description: Primary account used to sign in to the dashboard web UI.
+  admin_pass:
+    name: Admin password
+    description: Password for the admin user. Use a long random value.
+  auth_users:
+    name: Additional users
+    description: Optional comma-separated user:password pairs (user1:pass1,user2:pass2).
+  session_secret:
+    name: Session secret
+    description: Random string used to encrypt sessions. Change it before first start.
+  session_store_path:
+    name: Session storage path
+    description: Directory that stores session files (default /data/sessions).
+  db_path:
+    name: Database path
+    description: Location of the persistent SQLite database file.
+  user_settings_path:
+    name: User settings path
+    description: Path for persisted dashboard preferences (JSON).
+  desc_prop:
+    name: Description property
+    description: JSON property name for AI/iOS automations that contains the transaction description.
+  cats_prop:
+    name: Category property
+    description: JSON property name that stores transaction categories.
+  amount_prop:
+    name: Amount property
+    description: JSON property name that stores the transaction amount.
+  currency_prop:
+    name: Currency property
+    description: JSON property name that stores the transaction currency.
+  date_prop:
+    name: Date property
+    description: JSON property used for the transaction timestamp.
+  who_prop:
+    name: Who property
+    description: JSON property containing the person or account name.
+  usd_amount_prop:
+    name: USD amount property
+    description: JSON property for the converted USD amount (optional).
+  access_token:
+    name: API access token
+    description: Bearer token required when calling the REST API or automations.
+  vapid_public_key:
+    name: VAPID public key
+    description: Public key used to enable web push notifications.
+  vapid_private_key:
+    name: VAPID private key
+    description: Private key paired with the configured VAPID public key.
+  ai_provider:
+    name: AI provider
+    description: Select disabled, Gemini, or OpenAI for natural-language parsing.
+  gemini_api_key:
+    name: Gemini API key
+    description: Required when ai_provider is set to gemini.
+  gemini_model:
+    name: Gemini model
+    description: Model identifier used for Gemini parsing.
+  openai_api_key:
+    name: OpenAI API key
+    description: Required when ai_provider is set to openai.
+  openai_model:
+    name: OpenAI model
+    description: Model identifier used for OpenAI parsing.
+  backup_script_url:
+    name: Backup script URL
+    description: Google Apps Script web-app endpoint that accepts database backups.
+  backup_config_path:
+    name: Backup config path
+    description: Location for generated backup metadata (JSON).
+  backup_run_time:
+    name: Backup time
+    description: HH:MM (24h) time when automatic backup is executed.
+network:
+  3000/tcp: Finance Dashboard web interface
