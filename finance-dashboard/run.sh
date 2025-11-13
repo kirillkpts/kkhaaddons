@@ -123,5 +123,10 @@ export DB_PATH
 
 ensure_parent_dir "$BACKUP_CONFIG_PATH"
 
-cd /app
+APP_DIR="/opt/finance-dashboard"
+if [ ! -d "$APP_DIR" ]; then
+  APP_DIR="/app"
+fi
+
+cd "$APP_DIR"
 exec node server_local.js
