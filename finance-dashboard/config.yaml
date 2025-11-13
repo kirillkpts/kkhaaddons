@@ -1,7 +1,7 @@
 name: Finance Dashboard
 slug: finance_dashboard
 description: Personal finance dashboard with AI voice input, Apple Pay automation, and multi-currency support
-version: "1.0.0"
+version: "1.0.1"
 arch:
   - amd64
   - aarch64
