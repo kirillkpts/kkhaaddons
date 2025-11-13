@@ -18,8 +18,9 @@ Finance Dashboard brings a lightweight, local-first personal finance app to Home
 5. [Google Drive backups](#google-drive-backups)
    - [Quick setup](#quick-setup)
 6. [Web push notifications](#web-push-notifications)
-7. [Data persistence](#data-persistence)
-8. [Support & troubleshooting](#support--troubleshooting)
+7. [Remote access](#remote-access-duckdns--nginx-proxy-manager)
+8. [Data persistence](#data-persistence)
+9. [Support & troubleshooting](#support--troubleshooting)
 
 ---
 
@@ -190,6 +191,31 @@ Enable real-time alerts directly in the PWA or browser.
 
 Notifications are dispatched when automation rules fire (e.g. new expense created). iOS requires the dashboard to be installed as a PWA.
 
+
+## Remote access (DuckDNS + Nginx Proxy Manager)
+Expose the add-on safely over the internet by pairing DuckDNS with the Nginx Proxy Manager (NPM) add-on. Always enforce HTTPS, access tokens, and optional auth/IP filtering.
+
+1. **Get a DuckDNS hostname**
+   - Install the official DuckDNS add-on.
+   - In its configuration, paste your DuckDNS token, set a unique subdomain (e.g. `finance-ha.duckdns.org`), enable `accept_terms`, and start the add-on.
+   - Verify the hostname resolves to your Home Assistant public IP.
+2. **Forward HTTPS from your router**
+   - Create a port-forward/virtual server rule: WAN `443` -> Home Assistant host `443`.
+   - (Optional) Forward port `80` as well if you want automatic HTTP->HTTPS redirects and Let’s Encrypt HTTP validation.
+3. **Install and initialize Nginx Proxy Manager**
+   - Install the “Nginx Proxy Manager” add-on from Home Assistant Community Add-ons, start it, and open the Web UI.
+   - Log in with the default credentials, change them immediately, and optionally enable 2FA.
+4. **Create a proxy host for Finance Dashboard**
+   - In NPM, **Add Proxy Host**:
+     - *Domain Names*: your DuckDNS host (e.g. `finance-ha.duckdns.org`).
+     - *Scheme/Forward Host*: `http` -> Home Assistant host IP (e.g. `192.168.1.10`) and port `3000`.
+     - *Websockets*: enable.
+   - Under the **SSL** tab, request a Let’s Encrypt certificate for the same domain, enable “Force SSL” and “HTTP/2 Support”.
+5. **Lock down the add-on**
+   - Ensure `access_token`, admin credentials, and HTTPS are configured.
+   - Consider restricting NPM access lists to trusted IP ranges or requiring a VPN for admin use.
+
+After DNS propagates, browse to `https://finance-ha.duckdns.org` and authenticate with your Finance Dashboard credentials.
 
 ## Data persistence
 Reference paths for all long-term storage handled by the add-on.

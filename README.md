@@ -6,7 +6,7 @@
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports armv7 Architecture][armv7-shield]
 
-Finance Dashboard is a local-first personal finance web app with AI voice input, Apple Pay automation, push notifications, and multi-currency analytics. This repository hosts the Home Assistant add-on source only; the Docker image is compiled on your Home Assistant host during installation.
+Finance Dashboard is a self-hosted, local-first personal finance web app with AI voice input, Apple Pay automation, push notifications, and multi-currency analytics. This repository hosts the Home Assistant add-on source only; the Docker image is compiled on your Home Assistant host during installation, so no external SaaS or cloud services are required.
 
 ## Features
 
@@ -44,6 +44,8 @@ Finance Dashboard is a local-first personal finance web app with AI voice input,
 2. Install **Finance Dashboard** from the add-on store.
 3. Configure credentials, AI provider, storage paths, and optional automations.
 4. Start the add-on and open the web UI (default `http://homeassistant.local:3000`).
+
+Need encrypted remote access? Follow the [DuckDNS + Nginx Proxy Manager guide](./finance-dashboard/DOCS.md#remote-access-duckdns--nginx-proxy-manager).
 
 Detailed setup instructions, Apple Pay or voice walkthroughs, and troubleshooting guides live in [finance-dashboard/DOCS.md](./finance-dashboard/DOCS.md).
 

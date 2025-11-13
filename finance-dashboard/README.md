@@ -6,7 +6,7 @@ _Personal finance dashboard with AI voice input, Apple Pay automation, multi-cur
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports armv7 Architecture][armv7-shield]
 
-Finance Dashboard bundles a zero-external-dependency Node.js app that runs entirely inside Home Assistant. The add-on builds from source when you install it, so your instance always compiles the latest UI and API without waiting for published container images.
+Finance Dashboard bundles a zero-external-dependency Node.js app that runs entirely inside Home Assistant. The add-on builds from source when you install it, so your instance always compiles the latest UI and API without waiting for published container images, and everything stays fully self-hosted.
 
 ## Key features
 
@@ -23,6 +23,8 @@ Finance Dashboard bundles a zero-external-dependency Node.js app that runs entir
 2. Install **Finance Dashboard** from the store and wait for the local Docker build to finish.
 3. Open the add-on, adjust configuration (credentials, AI providers, paths, tokens).
 4. Start the service and click **Open Web UI** (default `http://homeassistant.local:3000`).
+
+Need to expose the dashboard over HTTPS? See the [remote access walkthrough](DOCS.md#remote-access-duckdns--nginx-proxy-manager).
 
 Full walkthroughs (voice automations, Apple Pay, backups, troubleshooting) live in [DOCS.md](DOCS.md).
 
