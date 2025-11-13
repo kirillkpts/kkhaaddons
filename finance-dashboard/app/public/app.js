@@ -4,6 +4,7 @@ const BOOTSTRAP_USED = { config: false, initial: false };
 let CONFIG = null;
 let editingId = null;
 let RAW_RESULTS = [];
+let LOAD_TOKEN = 0;
 let SORT = { key: "date", dir: -1 };
 let PAGE_SIZE = 20;
 let LOAD_ALL = false;
@@ -1144,6 +1145,7 @@ function baseParams() {
 }
 
 async function loadData() {
+  const token = ++LOAD_TOKEN;
   try {
     if (!CONFIG) await fetchConfig();
     const params = baseParams();
@@ -1152,23 +1154,25 @@ async function loadData() {
 
     // Consume server-provided initial page to avoid first API call
     if (BOOTSTRAP && BOOTSTRAP.initial && !BOOTSTRAP_USED.initial) {
-      try {
-        const data = BOOTSTRAP.initial || {};
-        RAW_RESULTS.push(...(data.results || []));
-        NEXT_CURSOR = data.next_cursor || null;
-        BOOTSTRAP_USED.initial = true;
-      } catch {}
-    } else {
-      let localCursor = CURRENT_CURSOR;
-      let localPage = 0;
-      do {
+        try {
+          const data = BOOTSTRAP.initial || {};
+          if (token !== LOAD_TOKEN) return;
+          RAW_RESULTS.push(...(data.results || []));
+          NEXT_CURSOR = data.next_cursor || null;
+          BOOTSTRAP_USED.initial = true;
+        } catch {}
+      } else {
+        let localCursor = CURRENT_CURSOR;
+        let localPage = 0;
+        do {
         const query = new URLSearchParams(params);
         if (localCursor) query.set("cursor", localCursor);
-        const data = await apiFetch(`/api/${current}?${query.toString()}`);
-        RAW_RESULTS.push(...(data.results || []));
-        NEXT_CURSOR = data.next_cursor || null;
-        localCursor = NEXT_CURSOR;
-        localPage += 1;
+          const data = await apiFetch(`/api/${current}?${query.toString()}`);
+          if (token !== LOAD_TOKEN) return;
+          RAW_RESULTS.push(...(data.results || []));
+          NEXT_CURSOR = data.next_cursor || null;
+          localCursor = NEXT_CURSOR;
+          localPage += 1;
         if (!LOAD_ALL) break;
       } while (localCursor && localPage < 50);
     }
