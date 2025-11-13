@@ -1144,12 +1144,25 @@ function baseParams() {
   return params;
 }
 
+function dedupeResults(items) {
+  const seen = new Set();
+  const unique = [];
+  for (const item of items) {
+    if (!item || typeof item !== "object") continue;
+    const id = item.id ?? JSON.stringify(item.properties || {});
+    if (seen.has(id)) continue;
+    seen.add(id);
+    unique.push(item);
+  }
+  return unique;
+}
+
 async function loadData() {
   const token = ++LOAD_TOKEN;
   try {
     if (!CONFIG) await fetchConfig();
     const params = baseParams();
-    RAW_RESULTS = [];
+    let buffer = [];
     NEXT_CURSOR = null;
 
     // Consume server-provided initial page to avoid first API call
@@ -1157,7 +1170,7 @@ async function loadData() {
         try {
           const data = BOOTSTRAP.initial || {};
           if (token !== LOAD_TOKEN) return;
-          RAW_RESULTS.push(...(data.results || []));
+          buffer.push(...(data.results || []));
           NEXT_CURSOR = data.next_cursor || null;
           BOOTSTRAP_USED.initial = true;
         } catch {}
@@ -1169,14 +1182,14 @@ async function loadData() {
         if (localCursor) query.set("cursor", localCursor);
           const data = await apiFetch(`/api/${current}?${query.toString()}`);
           if (token !== LOAD_TOKEN) return;
-          RAW_RESULTS.push(...(data.results || []));
+          buffer.push(...(data.results || []));
           NEXT_CURSOR = data.next_cursor || null;
           localCursor = NEXT_CURSOR;
           localPage += 1;
-        if (!LOAD_ALL) break;
-      } while (localCursor && localPage < 50);
-    }
-
+          if (!LOAD_ALL) break;
+        } while (localCursor && localPage < 50);
+      }
+      RAW_RESULTS = dedupeResults(buffer);
     if (CONFIG) {
       const aggregated = new Set(WHO_OPTIONS);
       for (const item of RAW_RESULTS) {
