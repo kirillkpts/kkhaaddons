@@ -22,27 +22,6 @@ configuration:
   user_settings_path:
     name: User settings path
     description: Path for persisted dashboard preferences (JSON).
-  desc_prop:
-    name: Description property
-    description: JSON property name for AI/iOS automations that contains the transaction description.
-  cats_prop:
-    name: Category property
-    description: JSON property name that stores transaction categories.
-  amount_prop:
-    name: Amount property
-    description: JSON property name that stores the transaction amount.
-  currency_prop:
-    name: Currency property
-    description: JSON property name that stores the transaction currency.
-  date_prop:
-    name: Date property
-    description: JSON property used for the transaction timestamp.
-  who_prop:
-    name: Who property
-    description: JSON property containing the person or account name.
-  usd_amount_prop:
-    name: USD amount property
-    description: JSON property for the converted USD amount (optional).
   access_token:
     name: API access token
     description: Bearer token required when calling the REST API or automations.

@@ -57,7 +57,6 @@ Detailed setup instructions, Apple Pay or voice walkthroughs, and troubleshootin
 
 - [User and automation docs](./finance-dashboard/DOCS.md)
 - [Add-on changelog](./finance-dashboard/CHANGELOG.md)
-- [Google Apps Script helper](./finance-dashboard/google-apps-script.js)
 - [Issue tracker](https://github.com/kirillkpts/kkhaaddons/issues)
 
 ## Contributing

@@ -537,13 +537,13 @@ app.post("/settings", async (req, res) => {
 });
 
 const PROP = {
-  description: process.env.DESC_PROP || "description",
-  categories: process.env.CATS_PROP || "category",
-  amount: process.env.AMOUNT_PROP || "amount",
-  currency: process.env.CURRENCY_PROP || "currency",
-  date: process.env.DATE_PROP || "date",
-  who: process.env.WHO_PROP || "who",
-  usdAmount: process.env.USD_AMOUNT_PROP || "usd_amount"
+  description: "description",
+  categories: "category",
+  amount: "amount",
+  currency: "currency",
+  date: "date",
+  who: "who",
+  usdAmount: "usd_amount"
 };
 
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, "finance.db");

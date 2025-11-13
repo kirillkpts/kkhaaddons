@@ -16,13 +16,6 @@ ensure_parent_dir() {
   fi
 }
 
-export DESC_PROP="$(get_json .desc_prop)"
-export CATS_PROP="$(get_json .cats_prop)"
-export AMOUNT_PROP="$(get_json .amount_prop)"
-export CURRENCY_PROP="$(get_json .currency_prop)"
-export DATE_PROP="$(get_json .date_prop)"
-export WHO_PROP="$(get_json .who_prop)"
-export USD_AMOUNT_PROP="$(get_json .usd_amount_prop)"
 export AUTH_USERS="$(get_json .auth_users)"
 export ADMIN_USER="$(get_json .admin_user)"
 export ADMIN_PASS="$(get_json .admin_pass)"

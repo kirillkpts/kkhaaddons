@@ -20,13 +20,6 @@ options:
   session_store_path: "/data/sessions"
   db_path: "/data/finance.db"
   user_settings_path: "/data/user-settings.json"
-  desc_prop: "description"
-  cats_prop: "category"
-  amount_prop: "amount"
-  currency_prop: "currency"
-  date_prop: "date"
-  who_prop: "who"
-  usd_amount_prop: "usd_amount"
   backup_script_url: ""
   backup_config_path: "/data/backup-config.json"
   backup_run_time: "03:00"
@@ -46,13 +39,6 @@ schema:
   session_store_path: str?
   db_path: str?
   user_settings_path: str?
-  desc_prop: str?
-  cats_prop: str?
-  amount_prop: str?
-  currency_prop: str?
-  date_prop: str?
-  who_prop: str?
-  usd_amount_prop: str?
   backup_script_url: str?
   backup_config_path: str?
   backup_run_time: str?

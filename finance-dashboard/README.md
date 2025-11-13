@@ -45,18 +45,6 @@ Full walkthroughs (voice automations, Apple Pay, backups, troubleshooting) live 
 | `backup_config_path` | Where backup metadata is stored. | `"/data/backup-config.json"` |
 | `backup_run_time` | HH:MM (24 h) time when backups run. | `"03:00"` |
 
-### AI and iOS property mapping
-
-| Option | Purpose | Default |
-| --- | --- | --- |
-| `desc_prop` | Transaction description field. | `"description"` |
-| `cats_prop` | Category field. | `"category"` |
-| `amount_prop` | Amount field. | `"amount"` |
-| `currency_prop` | Currency code. | `"currency"` |
-| `date_prop` | Date or timestamp. | `"date"` |
-| `who_prop` | Person or account field. | `"who"` |
-| `usd_amount_prop` | Converted USD amount (optional). | `"usd_amount"` |
-
 ## Build and storage notes
 
 - The container installs dependencies inside the Supervisor build pipeline, so no external registry is required.

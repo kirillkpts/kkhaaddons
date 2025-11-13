@@ -10,14 +10,16 @@ Finance Dashboard brings a lightweight, local-first personal finance app to Home
    - [Credentials & security](#credentials--security)
    - [Storage & persistence](#storage--persistence)
    - [AI configuration](#ai-configuration)
-   - [Automation property mapping](#automation-property-mapping)
-   - [Web push notifications](#web-push-notifications)
-   - [Google Drive backups](#google-drive-backups)
+   - [Web push notification options](#web-push-notification-options)
+   - [Google Drive backup options](#google-drive-backup-options)
 4. [Automations & Shortcuts](#automations--shortcuts)
    - [Voice input shortcut](#voice-input-shortcut)
    - [Apple Pay automation](#apple-pay-automation)
-5. [Data persistence](#data-persistence)
-6. [Support & troubleshooting](#support--troubleshooting)
+5. [Google Drive backups](#google-drive-backups)
+   - [Quick setup](#quick-setup)
+6. [Web push notifications](#web-push-notifications)
+7. [Data persistence](#data-persistence)
+8. [Support & troubleshooting](#support--troubleshooting)
 
 ---
 
@@ -97,22 +99,7 @@ How AI works:
 - Transactions are inserted instantly and synchronized to the UI.
 - Works in English and Russian out of the box.
 
-### Automation property mapping
-
-Customize the JSON schema expected by `/api/ai/phrase` (and other automation endpoints) without editing your Shortcuts. You can override each property name:
-
-| Option | Purpose | Default |
-| --- | --- | --- |
-| `desc_prop` | Description field | `"description"` |
-| `cats_prop` | Category field | `"category"` |
-| `amount_prop` | Amount field | `"amount"` |
-| `currency_prop` | Currency code | `"currency"` |
-| `date_prop` | Date or timestamp | `"date"` |
-| `who_prop` | Person/account | `"who"` |
-
-These options are especially helpful when reusing existing Shortcuts that already output specific keys.
-
-### Web push notifications
+### Web push notification options
 
 | Option | Description |
 | --- | --- |
@@ -124,7 +111,7 @@ Notes:
 - Push notifications require the dashboard to be installed as a PWA (Add to Home Screen/Springboard).
 - iOS allows push for PWAs that are pinned to the lock screen/home screen and opened at least once.
 
-### Google Drive backups
+### Google Drive backup options
 
 | Option | Description |
 | --- | --- |
@@ -133,9 +120,10 @@ Notes:
 
 `google-apps-script.js` inside this repository is a ready-made Apps Script handler that saves uploaded database blobs to Drive and exposes helper endpoints (list/delete/download). Follow the steps in [Google Drive backups](#google-drive-backups) to deploy it.
 
----
+> The add-on does **not** load `google-apps-script.js` automatically. Open the file locally, copy its entire contents, and paste them into the Apps Script editor as described below whenever you need Google Drive backups.
 
 ## Automations & Shortcuts
+Create voice/iOS flows that post structured payloads to the API so expenses land in the database instantly.
 
 ### Voice input shortcut
 
@@ -178,31 +166,22 @@ Tips:
 
 - Keep the `Authorization` header exactly as configured in the add-on.
 
----
 
 ## Google Drive backups
-
 Finance Dashboard can push encrypted SQLite backups to Google Drive once per day.
 
 ### Quick setup
 
 1. Create a Drive folder to store backups and copy the folder ID from the URL.
-2. Visit [script.google.com](https://script.google.com), create a project, and paste the contents of [`google-apps-script.js`](google-apps-script.js).
+2. Visit [script.google.com](https://script.google.com), create a project, delete the default `function myFunction() {}` stub, and paste the full contents of [`google-apps-script.js`](google-apps-script.js) into the editor.
 3. Replace both `'your-folder-id-here'` placeholders with your folder ID.
 4. Click **Deploy -> New deployment**, choose **Web app**, execute as *Me*, and grant access to *Anyone*.
 5. Copy the deployment URL into the add-on option `backup_script_url`.
 6. (Optional) Adjust `backup_run_time` and `backup_config_path`.
 7. Restart the add-on. It will call the Apps Script endpoint each day with a base64-encoded database blob.
 
-You can also:
-
-- `GET ?list=true` -> returns stored backups (id/name/timestamp/size).
-- `GET ?name=filename` -> downloads a specific backup.
-- `GET ?deleteId=FILE_ID` or `?deleteName=filename` -> removes backups.
-
----
-
 ## Web push notifications
+Enable real-time alerts directly in the PWA or browser.
 
 1. Generate a VAPID key pair (for example via https://vapidkeys.com/ or `web-push generate-vapid-keys`).
 2. Paste the public and private keys into the add-on configuration.
@@ -211,9 +190,9 @@ You can also:
 
 Notifications are dispatched when automation rules fire (e.g. new expense created). iOS requires the dashboard to be installed as a PWA.
 
----
 
 ## Data persistence
+Reference paths for all long-term storage handled by the add-on.
 
 - Database: `db_path` (default `/data/finance.db`)
 - User preferences: `user_settings_path` (default `/data/user-settings.json`)
@@ -222,9 +201,9 @@ Notifications are dispatched when automation rules fire (e.g. new expense create
 
 Because everything lives under `/data`, Home Assistant preserves your data across add-on restarts and updates.
 
----
 
 ## Support & troubleshooting
+Where to look when something goes wrong.
 
 - Review the [changelog](CHANGELOG.md) for recent fixes.
 - Search or open an issue on GitHub: https://github.com/kirillkpts/kkhaaddons/issues
